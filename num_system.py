@@ -131,7 +131,7 @@ class Number_system:
       redundant_num = str(int(Number_system.number_system_dec(redundant_num, radix_redundant_num)))
     if radix_num != 10:
       num = str(int(Number_system.number_system_dec(num, radix_num)))
-    return Number_system.number_system(str(int(redundant_num) - int(num)), 10, radix_result)
+    return Number_system.number_system(str(int(num) - int(redundant_num)), 10, radix_result)
 
   @staticmethod
   def redundant_number(redundant_number: Number, number: Number, radix_result: int = 10) -> Number:
@@ -173,3 +173,31 @@ class Number_system:
   @staticmethod
   def equal_number(number_a: Number, number_b: Number) -> bool:
     return Number_system.equal(number_a.num, number_b.num, number_a.radix, number_b.radix)
+
+  @staticmethod
+  def normalization(hatvany: int, binary: str):
+    result = 0
+    index = 0
+    for bit in binary:
+      index -= 1
+      if bit == "1":
+        result += 2 ** index
+    return (2 ** hatvany) * result
+
+  @staticmethod
+  def mantis(hatvany: int, num: str, radix: int = 10):
+    dec = Number_system.number_system_dec(num, radix) if radix != 10 else num
+    result = 0
+    index = 0
+    result_mantis = ""
+    while True:
+      index -= 1
+      result += 2 ** index
+      if result * (2 ** hatvany) == int(dec):
+        result_mantis += "1"
+        return result_mantis
+      if result * (2 ** hatvany) > int(dec):
+        result_mantis += "0"
+        result -= 2 ** index
+      else:
+        result_mantis += "1"

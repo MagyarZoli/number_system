@@ -41,7 +41,16 @@ def elojeles_abrazolasok():
   print(f"{tobblet}-többletes értéke = {Ns.binary_length_number(Ns.redundant_number(Number(str(tobblet), 10), binary, 2))}")
 
 
+def normalizalas():
+  pelda = Number("432", 10)
+  szam = Number("73", 10)
+  szam_bit = Ns.number_system_number(szam, 2)
+  hatvany = int(szam.num) - 64
+  mantis = Ns.mantis(hatvany, pelda.num, pelda.radix)
+  ellenorzes = int(Ns.normalization(hatvany, mantis))
+
+  print(f"{pelda.num} = 0 | {szam_bit.num} | {mantis}")
+  print(f"{szam.num} - {64} = {hatvany} | 2^{hatvany} * sum(2^mantis) = {ellenorzes}")
+
 if __name__ == "__main__":
-  ket_szam_osszehasonlito()
-  print()
-  elojeles_abrazolasok()
+  normalizalas()
